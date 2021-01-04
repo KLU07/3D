@@ -14,8 +14,6 @@ void draw() {
   background(255);
   cube(width/2, 600, 0, sage, 150);
   ball(width/2, 200, 0, coral, 150);
-  
-
 }
 
 
