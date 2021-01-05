@@ -1,4 +1,3 @@
-//Prog 12 - 3D Sketches Part 3 timestamp 3:06
 float rotx, roty;
 PImage diamond;
 
