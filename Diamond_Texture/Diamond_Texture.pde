@@ -35,8 +35,7 @@ void draw() {
   vertex(1, 1, 1, 1, 1);
   vertex(0, 1, 1, 0, 1); 
   
-  //front
-  //     x, y, z, texture's x, texture's y  
+  //front  
   vertex(0, 0, 1, 0, 0);
   vertex(1, 0, 1, 1, 0);
   vertex(1, 1, 1, 1, 1);
