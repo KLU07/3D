@@ -1,3 +1,7 @@
+import java.awt.Robot; 
+
+Robot rbt;
+
 //camera variables
 float eyex, eyey, eyez; //camera position
 float focusx, focusy, focusz; //point at which camera focuses
@@ -11,7 +15,15 @@ float leftRightAngle, upDownAngle;
 
 
 void setup() {
-  size(800, 800, P3D);
+  try {
+    rbt = new Robot();  //robot MUST be instantiated inside try-catch 
+  }
+  catch(Exception e) {
+    e.printStackTrace();
+  }
+  
+  size(displayWidth, displayHeight, P3D); //display = device's screen width and height
+  
   eyex = width/2;
   eyey = height/2;
   eyez = height/2;
@@ -62,7 +74,9 @@ void move() {
   if (upDownAngle > PI/2.5) upDownAngle = PI/2.5; //PI/2.5 = approx 90 degrees
   if (upDownAngle < -PI/2.5) upDownAngle = -PI/2.5;
     
-  
+  //teleport mouse across screen
+  if (mouseX > width-2) rbt.mouseMove(3, mouseY);
+  if (mouseX < 2) rbt.mouseMove(width-3, mouseY);
 }
 
 
