@@ -6,6 +6,9 @@ float upx, upy, upz; //tilt axis
 //keyboard variables
 boolean wkey, akey, skey, dkey;
 
+//rotation variables
+float leftRightAngle, upDownAngle;
+
 
 void setup() {
   size(800, 800, P3D);
@@ -20,7 +23,6 @@ void setup() {
   upx = 0;
   upy = 1;
   upz = 0;
-  
 }
 
 
@@ -49,9 +51,18 @@ void move() {
   if (wkey) eyez = eyez - 10;
   if (skey) eyez = eyez + 10;
   
-  focusx = eyex;
-  focusy = eyey;
-  focusz = eyez - 100;
+  focusx = eyex + cos(leftRightAngle)*100;
+  focusy = eyey + tan(upDownAngle)*100; //unchanged, as it is for looking up and down
+  focusz = eyez + sin(leftRightAngle)*100;
+  
+  leftRightAngle = leftRightAngle + (mouseX - pmouseX)*0.01;
+  upDownAngle = upDownAngle + (mouseY - pmouseY)*0.01;
+  
+  //prevent from teleporting from ceiling to floor
+  if (upDownAngle > PI/2.5) upDownAngle = PI/2.5; //PI/2.5 = approx 90 degrees
+  if (upDownAngle < -PI/2.5) upDownAngle = -PI/2.5;
+    
+  
 }
 
 
