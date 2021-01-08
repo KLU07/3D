@@ -45,7 +45,7 @@ void draw() {
   move();
   
   drawAxis();
-  drawFloor(-2000, 2000, height, 100); //draw existing floor
+  drawFloor(-2000, 2000, height, 100); //draw floor
   drawFloor(-2000, 2000, 0, 100); //draw ceiling
 }
 
@@ -60,21 +60,24 @@ void move() {
   if (akey) eyex = eyex - 10;
   if (dkey) eyex = eyex + 10;
   //forward back movement
-  if (wkey) eyez = eyez - 10;
+  if (wkey) {
+    eyex = eyex + cos(leftRightAngle)*10;
+    eyez = eyez + sin(leftRightAngle)*10;
+  }
   if (skey) eyez = eyez + 10;
   
   focusx = eyex + cos(leftRightAngle)*100;
-  focusy = eyey + tan(upDownAngle)*100; //unchanged, as it is for looking up and down
+  focusy = eyey + tan(upDownAngle)*100;
   focusz = eyez + sin(leftRightAngle)*100;
   
   leftRightAngle = leftRightAngle + (mouseX - pmouseX)*0.01;
   upDownAngle = upDownAngle + (mouseY - pmouseY)*0.01;
   
-  //prevent from teleporting from ceiling to floor
+  //prevent teleporting from ceiling to floor
   if (upDownAngle > PI/2.5) upDownAngle = PI/2.5; //PI/2.5 = approx 90 degrees
   if (upDownAngle < -PI/2.5) upDownAngle = -PI/2.5;
     
-  //teleport mouse across screen
+  //make mouse wrap-around screen
   if (mouseX > width-2) rbt.mouseMove(3, mouseY);
   if (mouseX < 2) rbt.mouseMove(width-3, mouseY);
 }
