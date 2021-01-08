@@ -57,14 +57,24 @@ void move() {
   popMatrix();
   
   //left right movement
-  if (akey) eyex = eyex - 10;
-  if (dkey) eyex = eyex + 10;
+  if (akey) {
+    eyex = eyex - cos(leftRightAngle + radians(90))*10;
+    eyez = eyez - sin(leftRightAngle + radians(90))*10;
+  }
+  if (dkey) {
+    eyex = eyex + cos(leftRightAngle + radians(90))*10;
+    eyez = eyez + sin(leftRightAngle + radians(90))*10;
+  }
   //forward back movement
   if (wkey) {
     eyex = eyex + cos(leftRightAngle)*10;
     eyez = eyez + sin(leftRightAngle)*10;
+    //can also be written as eyez += sin(leftRightAngle)*10;    
   }
-  if (skey) eyez = eyez + 10;
+  if (skey) {
+    eyex = eyex - cos(leftRightAngle)*10;
+    eyez = eyez - sin(leftRightAngle)*10;
+  }
   
   focusx = eyex + cos(leftRightAngle)*100;
   focusy = eyey + tan(upDownAngle)*100;
